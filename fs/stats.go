@@ -6,5 +6,5 @@ type Space struct {
 }
 
 type Unit interface {
-	getSpace() Space
+	GetSpace() Space
 }

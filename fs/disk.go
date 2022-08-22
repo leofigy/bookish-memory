@@ -8,11 +8,30 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-type UDisk struct{}
+type NixUnit struct{
+	dir string
+	info unix.Statfs_t
+	Space
+}
+
+func (n *NixUnit) GetSpace() Space {
+	info, err := Stats(n.dir)
+	if err != nil {
+		log.Println(err)
+		return n.Space,
+	}
+	n.info = info
+
+	// TODO update calc here for current values
+
+	return n.Space,
+}
 
 func CalcSpace(wd string) (Unit, error) {
-	Stats(wd)
-	return nil, nil
+	proc := &NixUnit{
+		dir: wd,
+	}
+	return proc, nil
 }
 
 func Stats(wd string) (unix.Statfs_t, error) {
