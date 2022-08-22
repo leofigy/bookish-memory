@@ -3,10 +3,18 @@
 package disk
 
 import (
+	"fmt"
 	"log"
 	"os"
 
 	"golang.org/x/sys/unix"
+)
+
+const (
+	B  = 1
+	KB = 1024 * B
+	MB = 1024 * KB
+	GB = 1024 * MB
 )
 
 type NixUnit struct {
@@ -25,7 +33,12 @@ func (n *NixUnit) GetSpace() Space {
 
 	// TODO update calc here for current values
 	n.Total = int64(info.Blocks * uint64(info.Bsize))
-	n.Used = int64(info.Bavail * uint64(info.Bsize))
+
+	n.Used = n.Total - int64(info.Bfree*uint64(info.Bsize))
+
+	fmt.Println(
+		float64(info.Blocks*uint64(info.Bsize)-info.Bavail*uint64(info.Bsize)) / float64(GB),
+	)
 
 	return n.Space
 }
