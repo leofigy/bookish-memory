@@ -1,9 +1,19 @@
+//go:build !windows
+
 package disk
 
 import (
 	"os"
+
 	"golang.org/x/sys/unix"
 )
+
+type UDisk struct{}
+
+func CalcSpace(wd string) (Unit, error) {
+	Stats(wd)
+	return nil, nil
+}
 
 func Stats(wd string) (unix.Statfs_t, error) {
 	var (

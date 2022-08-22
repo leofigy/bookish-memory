@@ -10,6 +10,10 @@ var getDiskFreeSpaceExW = windows.MustLoadDLL("Kernel32.dll").MustFindProc("GetD
 
 type WinUnit struct{}
 
-func Space(wd string) (int64, error) {
+func (w *WinUnit) getSpace() Space {
+	return Space{}
+}
 
+func CalcSpace(wd string) (Unit, error) {
+	return nil, nil
 }
