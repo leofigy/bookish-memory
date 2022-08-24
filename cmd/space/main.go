@@ -7,10 +7,10 @@ import (
 )
 
 func main() {
-	inf, err := fs.Stats("")
+	inf, err := fs.CalcSpace("")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(inf.Bavail * uint64(inf.Bsize))
+	fmt.Println(inf.GetSpace())
 }
