@@ -1,9 +1,13 @@
 module gihub.com/leofigy/bookish-memory
 
-go 1.19
+go 1.18
 
 require (
-	fyne.io/fyne/v2 v2.2.3 // indirect
+	fyne.io/fyne/v2 v2.2.3
+	golang.org/x/sys v0.0.0-20220818161305-2296e01440c6
+)
+
+require (
 	fyne.io/systray v1.10.1-0.20220621085403-9a2652634e93 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fredbi/uri v0.0.0-20181227131451-3dcfdacbaaf3 // indirect
@@ -26,7 +30,6 @@ require (
 	golang.org/x/image v0.0.0-20220601225756-64ec528b34cd // indirect
 	golang.org/x/mobile v0.0.0-20211207041440-4e6c2922fdee // indirect
 	golang.org/x/net v0.0.0-20210805182204-aaa1db679c0d // indirect
-	golang.org/x/sys v0.0.0-20220818161305-2296e01440c6 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	honnef.co/go/js/dom v0.0.0-20210725211120-f030747120f2 // indirect
