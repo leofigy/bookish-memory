@@ -5,6 +5,7 @@ package usb
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"golang.org/x/sys/windows/registry"
 )
@@ -29,4 +30,53 @@ func GetUSBKey(path string) (*registry.Key, error) {
 	}
 
 	return &reg, nil
+}
+
+type Inspector struct{}
+
+func NewInspektor() USBInspektor {
+	return &Inspector{}
+}
+
+func (s *Inspector) GetDevicesHistory() ([]Info, error) {
+	devices := make([]Info, 0)
+
+	key, err := GetUSBKey(registryEntry)
+
+	if err != nil && err == registry.ErrNotExist {
+		fmt.Println("soft error this machine has no usb devices connected yet")
+		fmt.Println(err)
+		return devices, nil
+	}
+
+	defer key.Close()
+
+	info, err := key.Stat()
+	if err != nil {
+		return devices, err
+	}
+
+	if info.SubKeyCount <= 0 {
+		return devices, nil
+	}
+
+	subkeys, err := key.ReadSubKeyNames(
+		int((info.SubKeyCount)),
+	)
+
+	if err != nil {
+		return devices, err
+	}
+
+	for _, k := range subkeys {
+		// TODO fetch the subkey to get the actual time
+		devices = append(
+			devices, Info{
+				time.Now(),
+				k,
+			},
+		)
+	}
+
+	return devices, nil
 }

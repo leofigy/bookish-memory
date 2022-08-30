@@ -7,6 +7,6 @@ type Info struct {
 	FriendlyName    string
 }
 
-type USB interface {
-	GetHistory() Info
+type USBInspektor interface {
+	GetDevicesHistory() ([]Info, error)
 }
