@@ -50,3 +50,9 @@ func InspectDir(base string) error {
 	}
 	return nil
 }
+
+type FSProc struct{}
+
+func (p *FSProc) FindHeader(data []byte, fsname string) {
+
+}
