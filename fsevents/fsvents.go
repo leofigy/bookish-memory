@@ -15,7 +15,20 @@ import (
 	"io/ioutil"
 )
 
-type FSEvent struct{}
+type FSEvent struct {
+	ID                        string
+	IDHex                     int32
+	FullPath                  string
+	Filename                  string
+	Type                      string
+	Flags                     string
+	AproxDatesPlusMinusOneDay string
+	Mask                      int32
+	NodeID                    string
+	RecordEndOffSet           string
+	Source                    string
+	SourceModifiedDate        string
+}
 
 type FSEventHandler interface {
 	WorkingDir() string
