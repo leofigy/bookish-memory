@@ -15,6 +15,17 @@ import (
 	"io/ioutil"
 )
 
+type FSEvent struct{}
+
+type FSEventHandler interface {
+	WorkingDir() string
+	Inspect(string) error
+	Parse(chan (FSEvent))
+}
+
+// TODO steps
+// check if is a gzip file create a temporary directory to unzip information
+// check the header format
 func InspectDir(base string) error {
 	files, err := ioutil.ReadDir(base)
 	if err != nil {
